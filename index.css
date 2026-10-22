@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* الوضع الداكن يعتمد على الصنف .dark على عنصر html */
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -8,35 +9,13 @@
 
 html {
   font-family: var(--font-sans);
-  direction: rtl;
 }
 
 body {
-  background-color: var(--color-slate-50, #f8fafc);
-  color: var(--color-slate-900, #0f172a);
+  @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
 }
 
-.dark body {
-  background-color: var(--color-slate-950, #020617);
-  color: var(--color-slate-100, #f1f5f9);
-}
-
-/* Scrollbar aesthetic styling */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.4);
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.7);
-}
-
+/* تقليل الحركة لمن يفضل ذلك */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
