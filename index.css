@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Tajawal", "Noto Naskh Arabic", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+}
+
+html {
+  font-family: var(--font-sans);
+  direction: rtl;
+}
+
+body {
+  background-color: var(--color-slate-50, #f8fafc);
+  color: var(--color-slate-900, #0f172a);
+}
+
+.dark body {
+  background-color: var(--color-slate-950, #020617);
+  color: var(--color-slate-100, #f1f5f9);
+}
+
+/* Scrollbar aesthetic styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
