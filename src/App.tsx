@@ -1,10 +1,20 @@
-import React from 'react'
+import { useEffect, useMemo } from 'react'
+import { RouterProvider, createHashRouter } from 'react-router-dom'
+import { routes } from './routes'
+import { syncService } from '../services/syncService'
 
-export default function App() {
-  return (
-    <div style={{ padding: '20px', fontFamily: 'sans-serif', textAlign: 'center' }}>
-      <h1>UniStudy AI</h1>
-      <p>الموقع يعمل بنجاح وجاري تحميل المنصة...</p>
-    </div>
-  )
+export function App() {
+  const router = useMemo(() => createHashRouter(routes), [])
+
+  // Pull shared content updates on start, when the tab regains focus, and when the connection returns
+  useEffect(() => {
+    const run = () => void syncService.sync()
+    run()
+    window.addEventListener('online', run)
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') run()
+    })
+    return () => window.removeEventListener('online', run)
+  }, [])
+  return <RouterProvider router={router} />
 }
