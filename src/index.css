@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+/* الوضع الداكن يعتمد على الصنف .dark على عنصر html */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Tajawal", "Noto Naskh Arabic", system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+}
+
+html {
+  font-family: var(--font-sans);
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+}
+
+/* تقليل الحركة لمن يفضل ذلك */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
