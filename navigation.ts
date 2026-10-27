@@ -6,7 +6,6 @@ import {
   HelpCircle,
   Award,
   History,
-  Bot,
   Settings,
 } from 'lucide-react'
 
@@ -60,13 +59,6 @@ export const NAV_ITEMS: readonly NavItem[] = [
     shortLabel: 'السجل',
     primary: false,
     icon: History,
-  },
-  {
-    path: '/ai',
-    label: 'مساعد الذكاء الاصطناعي',
-    shortLabel: 'المساعد',
-    primary: false,
-    icon: Bot,
   },
   {
     path: '/settings',

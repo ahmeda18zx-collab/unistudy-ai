@@ -64,6 +64,7 @@ export const backupService = {
       examAttempts,
       studyProgress,
       settings,
+      lessons,
     ] = await Promise.all([
       db.subjects.toArray(),
       db.units.toArray(),
@@ -73,6 +74,7 @@ export const backupService = {
       db.examAttempts.toArray(),
       db.studyProgress.toArray(),
       db.settings.toArray(),
+      db.lessons.toArray(),
     ])
 
     const now = Date.now()
@@ -117,6 +119,7 @@ export const backupService = {
       examAttempts,
       studyProgress,
       settings,
+      lessons,
     }
 
     zip.file('manifest.json', JSON.stringify(manifest, null, 2))
@@ -299,6 +302,7 @@ export const backupService = {
         db.examAttempts,
         db.studyProgress,
         db.settings,
+        db.lessons,
       ],
       async () => {
         if (mode === 'replace') {
@@ -311,6 +315,7 @@ export const backupService = {
             db.exams.clear(),
             db.examAttempts.clear(),
             db.studyProgress.clear(),
+            db.lessons.clear(),
           ])
         }
 
@@ -323,6 +328,9 @@ export const backupService = {
         }
         if (restoredDocuments.length > 0) {
           await db.documents.bulkPut(restoredDocuments)
+        }
+        if (Array.isArray(data.lessons) && data.lessons.length > 0) {
+          await db.lessons.bulkPut(data.lessons)
         }
         if (importedQuestions.length > 0) {
           await db.questions.bulkPut(importedQuestions)
